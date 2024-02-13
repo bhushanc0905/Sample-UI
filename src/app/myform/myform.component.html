@@ -1,0 +1,31 @@
+<!-- myform.component.html -->
+
+<div class="container mx-auto p-4">
+    <form [formGroup]="formTest" (ngSubmit)="submitForm()">
+        <div class="container">
+            <input type="file" formControlName="fileInputBox" (change)="onFileChange($event)" accept=".txt">
+            <div *ngIf="formTest.get('fileInputBox')?.value">
+            
+            <h2>Select Message Number:</h2>
+            <input type="number" formControlName="selectedMessageNum" min="1" [max]="getMaxMessageNum()">
+            <div>
+              <input type="text" [value]="'Total Messages: ' + getTotalMessages()" readonly>
+              <input type="text" [value]="'Total Words: ' + getTotalWords()" readonly>
+              <input type="text" [value]="'Total Unique Words: ' + getTotalUniqueWords()" readonly>
+              <input type="text" value="Unique Words Found:" readonly>
+              <ul>
+                <li *ngFor="let word of uniqueWords">
+                  <input type="text" [value]="word" readonly>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3>Ressembled Message Output:</h3>
+              <div [innerHTML]="getRessembledMsgOutput()"></div>
+            </div>
+          </div>
+          <button type="submit">Submit</button>
+        </div>
+    </form>
+  </div>
+  
